@@ -25,7 +25,7 @@ How to run fink demo
 
 To use dependencies in ./lib dir 
 
-make dependencies in pom.xml <scope>provided</scope> and copy dependencies from your local repo into lib dir, then
+make dependencies in pom.xml '<scope>provided</scope>' and copy dependencies from your local repo into lib dir, then
 ./bin/flink run -c myflink.StreamWindowWordCount -C file://./lib/flink-java-1.12.1.jar,./flink-streaming-java_2.12-1.12.1.jar,./lib/flink-clients_2.12-1.12.1.jar,./lib/log4j-api-2.12.1.jar,./lib/log4j-core-2.12.1.jar,./lib/log4j-slf4j-impl-2.12.1.jar ./examples/my-flink-project-0.1.jar ./examples/hello.txt
 
 To see result
