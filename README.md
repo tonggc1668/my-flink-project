@@ -54,6 +54,7 @@ or just open it with your text editor
 -------------------------------------------------------------------------------------------------------
 
 Q: How to run flink sql client
+https://ci.apache.org/projects/flink/flink-docs-release-1.13/docs/dev/table/sqlclient/
 
 $FLINK_HOME/conf/flink-conf.yaml
 classloader.resolve-order: parent-first
