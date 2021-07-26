@@ -1,4 +1,20 @@
-How to run fink local, please see 
+Q: How to run kafka local
+download kafka http://kafka.apache.org/downloads
+
+start zookeeper
+$ bin/zookeeper-server-start.sh config/zookeeper.properties
+start kafka
+$ bin/kafka-server-start.sh config/server.properties
+start kafka producer
+$ bin/kafka-console-producer.sh --broker-list localhost:9092  --topic topicName
+e.g. bin/kafka-console-producer.sh --broker-list localhost:9092  --topic sensor
+start kafka consumer
+$ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topicName
+e.g. bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic sinktest
+
+-------------------------------------------------------------------------------------------------------
+
+Q: How to run fink local, please see 
 https://ci.apache.org/projects/flink/flink-docs-release-1.12/try-flink/local_installation.html
 
 1 download flink-1.12.3-bin-scala_2.11.tgz
@@ -11,7 +27,9 @@ https://ci.apache.org/projects/flink/flink-docs-release-1.12/try-flink/local_ins
 
 5 ./bin/stop-cluster.sh
 
-How to run fink demo
+-------------------------------------------------------------------------------------------------------
+
+Q: How to run fink demo
 
 1 mvn clean package
 
@@ -21,7 +39,7 @@ How to run fink demo
 
 4 cd flink
 
-5 ./bin/flink run -c myflink.StreamWindowWordCount ./examples/my-flink-project-0.1.jar ./examples/hello.txt
+5 ./bin/flink run -c myflink.StreamWindowWordCount -p 1 ./examples/my-flink-project-0.1.jar ./examples/hello.txt
 
 To use dependencies in ./lib dir 
 
@@ -31,6 +49,17 @@ make dependencies in pom.xml '<scope>provided</scope>' and copy dependencies fro
 To see result
 
 tail -f log/flink-${who am i}-taskexecutor-0-${hostname}.out
+or just open it with your text editor
+
+-------------------------------------------------------------------------------------------------------
+
+Q: How to run flink sql client
+
+$FLINK_HOME/conf/flink-conf.yaml
+classloader.resolve-order: parent-first
+
+copy dependencies from your local repo in pom into lib dir
+./bin/sql-client.sh embedded -l lib
 
 
 

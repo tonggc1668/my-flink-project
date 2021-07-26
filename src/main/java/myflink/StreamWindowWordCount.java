@@ -31,7 +31,7 @@ public class StreamWindowWordCount {
 		// 创建 execution environment
 		StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 		//env.setStreamTimeCharacteristic(TimeCharacteristic.ProcessingTime);
-		env.setParallelism(1);
+		//env.setParallelism(3);
 		env.setRuntimeMode(RuntimeExecutionMode.STREAMING);
 
 

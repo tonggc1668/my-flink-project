@@ -7,22 +7,6 @@ import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
 
 import java.util.Properties;
 
-
-/*下载kafka解压 http://kafka.apache.org/downloads
-
-        启动zookeeper
-
-        $ bin/zookeeper-server-start.sh config/zookeeper.properties
-
-        启动kafka服务
-
-        $ bin/kafka-server-start.sh config/server.properties
-
-        启动kafka生产者
-
-        $ bin/kafka-console-producer.sh --broker-list localhost:9092  --topic sensor*/
-
-
 public class SourceTest3_Kafka {
 
     public static void main(String[] args) throws Exception {

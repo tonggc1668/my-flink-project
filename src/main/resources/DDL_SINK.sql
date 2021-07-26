@@ -7,7 +7,6 @@ CREATE TABLE outputTable (
   'connector' = 'upsert-kafka'
   ,'topic' = 'sinktest'
   ,'properties.bootstrap.servers' = 'localhost:9092'
-  ,'properties.group.id' = 'consumer-group'
   ,'key.format' = 'json'
   ,'key.json.ignore-parse-errors' = 'true'
   ,'value.format' = 'json'

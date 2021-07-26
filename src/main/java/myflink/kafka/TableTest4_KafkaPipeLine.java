@@ -9,32 +9,6 @@ import org.apache.flink.table.descriptors.Csv;
 import org.apache.flink.table.descriptors.Kafka;
 import org.apache.flink.table.descriptors.Schema;
 
-
-/*下载kafka解压 http://kafka.apache.org/downloads
-
-        启动zookeeper
-
-        $ bin/zookeeper-server-start.sh config/zookeeper.properties
-
-        启动kafka服务
-
-        $ bin/kafka-server-start.sh config/server.properties
-
-        启动kafka生产者
-
-        $ bin/kafka-console-producer.sh --broker-list localhost:9092  --topic sensor
-
-        启动kafka消费者
-        $ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic sinktest
-
-sensor_1,1547718199,35.8
-sensor_6,1547718201,15.4
-sensor_7,1547718202,6.7
-sensor_10,1547718205,38.1
-sensor_1,1547718207,36.3
-sensor_1,1547718209,32.8
-sensor_1,1547718212,37.1
-*/
 public class TableTest4_KafkaPipeLine {
     public static void main(String[] args) throws Exception {
         // 1. 创建环境
@@ -52,6 +26,8 @@ public class TableTest4_KafkaPipeLine {
         tableEnv.connect(new Kafka()
                 .version("universal")
                 .topic("sensor")
+                .property("group.id", "consumer-group")
+                .property("auto.offset.reset", "earliest")
                 .property("zookeeper.connect", "localhost:2181")
                 .property("bootstrap.servers", "localhost:9092")
         )
@@ -66,8 +42,8 @@ public class TableTest4_KafkaPipeLine {
         // 3. 查询转换
         // 简单转换
         Table sensorTable = tableEnv.from("inputTable");
-        Table resultTable = sensorTable.select("id, temp")
-                .filter("id === 'sensor_6'");
+        Table resultTable = sensorTable.select("id, temp");
+                //.filter("id === 'sensor_6'");
 
         // 聚合统计
         /*Table aggTable = sensorTable.groupBy("id")

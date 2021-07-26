@@ -7,6 +7,6 @@ CREATE TABLE inputTable (
   ,'topic' = 'sensor'
   ,'properties.bootstrap.servers' = 'localhost:9092'
   ,'properties.group.id' = 'consumer-group'
-  ,'scan.startup.mode' = 'group-offsets'
+  ,'scan.startup.mode' = 'earliest-offset'
   ,'format' = 'csv'
 )
