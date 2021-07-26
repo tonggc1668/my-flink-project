@@ -22,7 +22,7 @@ CREATE TABLE orders (
 ) WITH (
     'connector.type' = 'kafka',
     'connector.version' = 'universal',
-    'connector.topic' = 'order_sql',
+    'connector.topic' = 'order_topic',
     'connector.startup-mode' = 'earliest-offset',
     'connector.properties.group.id' = 'testGroup',
     'connector.properties.zookeeper.connect' = 'localhost:2181',
@@ -40,13 +40,26 @@ CREATE TABLE orders (
    WATERMARK FOR ts AS ts - INTERVAL '5' SECOND   -- 在ts上定义5 秒延迟的 watermark
 ) WITH (
   'connector' = 'kafka'
-  ,'topic' = 'order_sql'
+  ,'topic' = 'order_topic'
   ,'properties.bootstrap.servers' = 'localhost:9092'
   ,'properties.group.id' = 'testGroup'
   ,'scan.startup.mode' = 'earliest-offset'
   ,'format' = 'json'
 );
 
+CREATE TABLE order_sink (
+    shop_id VARCHAR,
+    tumble_start VARCHAR,
+    tumble_end VARCHAR,
+    amt DOUBLE
+) WITH (
+  'connector' = 'kafka'
+  ,'topic' = 'order_sink_topic'
+  ,'properties.bootstrap.servers' = 'localhost:9092'
+  ,'format' = 'json'
+);
+
+INSERT INTO order_sink
 SELECT
   shop_id
   , TUMBLE_START(ts, INTERVAL '1' MINUTE) AS tumble_start
