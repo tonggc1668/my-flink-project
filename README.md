@@ -5,13 +5,16 @@ start zookeeper
 $ bin/zookeeper-server-start.sh config/zookeeper.properties
 start kafka
 $ bin/kafka-server-start.sh config/server.properties
+or JMX_PORT=9988 bin/kafka-server-start.sh -daemon config/server.properties
 start kafka producer
 $ bin/kafka-console-producer.sh --broker-list localhost:9092  --topic topicName
-e.g. bin/kafka-console-producer.sh --broker-list localhost:9092  --topic sensor
 start kafka consumer
 $ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topicName
-e.g. bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic sinktest
-
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topicName --from-beginning --consumer-property group.id=test-group
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topicName --consumer-property group.id=test-group
+cat kafka-consumer-groups
+bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
+bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group test-group
 -------------------------------------------------------------------------------------------------------
 
 Q: How to run fink local, please see 
