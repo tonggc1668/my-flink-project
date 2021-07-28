@@ -4,7 +4,7 @@ CREATE TABLE user_behavior (
   ,category_id VARCHAR
   ,behavior VARCHAR
   ,ts VARCHAR
-  ,myTs AS TO_TIMESTAMP(CONVERT_TZ(REPLACE(ts, 'T', ' '), 'UTC', 'GMT+08:00'));
+  ,myTs AS TO_TIMESTAMP(CONVERT_TZ(REPLACE(ts, 'T', ' '), 'UTC', 'GMT+08:00'))
   ,WATERMARK FOR myTs AS myTs - INTERVAL '5' SECOND
 ) WITH (
   'connector' = 'kafka'

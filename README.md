@@ -20,6 +20,7 @@ describe topic
 bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic topicName
 delete topic
 bin/kafka-topics.sh --delete --zookeeper localhost:2181 --topic topicName
+
 -------------------------------------------------------------------------------------------------------
 
 Q: How to run fink local, please see 
