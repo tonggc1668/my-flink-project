@@ -31,3 +31,17 @@ COUNT(1) as pv
 FROM user_behavior
 WHERE behavior = 'pv'
 GROUP BY item_id, HOP(myTs, INTERVAL '1' MINUTE, INTERVAL '2' MINUTE);
+
+select * from (
+select *, ROW_NUMBER() over (partition by windowEnd order by cnt desc) as row_num
+from (
+SELECT
+DATE_FORMAT(HOP_END(myTs, INTERVAL '1' MINUTE, INTERVAL '2' MINUTE), 'yyyy-MM-dd hh:mm:ss') as windowEnd,
+item_id,
+COUNT(1) as cnt
+FROM user_behavior
+WHERE behavior = 'pv'
+GROUP BY item_id, HOP(myTs, INTERVAL '1' MINUTE, INTERVAL '2' MINUTE)
+)
+)
+where row_num <= 1;
