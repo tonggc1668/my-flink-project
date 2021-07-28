@@ -23,3 +23,11 @@ COUNT(1) as pv
 FROM user_behavior
 WHERE behavior = 'pv'
 GROUP BY item_id, TUMBLE(myTs, INTERVAL '1' MINUTE);
+
+SELECT DATE_FORMAT(HOP_START(myTs, INTERVAL '1' MINUTE, INTERVAL '2' MINUTE), 'yyyy-MM-dd hh:mm:ss') as windowStart,
+DATE_FORMAT(HOP_END(myTs, INTERVAL '1' MINUTE, INTERVAL '2' MINUTE), 'yyyy-MM-dd hh:mm:ss') as windowEnd,
+item_id,
+COUNT(1) as pv
+FROM user_behavior
+WHERE behavior = 'pv'
+GROUP BY item_id, HOP(myTs, INTERVAL '1' MINUTE, INTERVAL '2' MINUTE);
