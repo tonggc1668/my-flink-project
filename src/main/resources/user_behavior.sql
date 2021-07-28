@@ -16,9 +16,10 @@ CREATE TABLE user_behavior (
 );
 --SELECT * FROM user_behavior;
 
-SELECT DATE_FORMAT(TUMBLE_START(ts, INTERVAL '10' MINUTE), 'yyyy-MM-dd hh:mm:ss'),
-DATE_FORMAT(TUMBLE_END(ts, INTERVAL '10' MINUTE), 'yyyy-MM-dd hh:mm:ss'),
-COUNT(*)
+SELECT DATE_FORMAT(TUMBLE_START(myTs, INTERVAL '1' MINUTE), 'yyyy-MM-dd hh:mm:ss') as windowStart,
+DATE_FORMAT(TUMBLE_END(myTs, INTERVAL '1' MINUTE), 'yyyy-MM-dd hh:mm:ss') as windowEnd,
+item_id,
+COUNT(1) as pv
 FROM user_behavior
 WHERE behavior = 'pv'
-GROUP BY TUMBLE(ts, INTERVAL '10' MINUTE);
+GROUP BY item_id, TUMBLE(myTs, INTERVAL '1' MINUTE);
