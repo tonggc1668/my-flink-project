@@ -23,7 +23,7 @@ CREATE TABLE orders (
     'connector.type' = 'kafka',
     'connector.version' = 'universal',
     'connector.topic' = 'order_topic',
-    'connector.startup-mode' = 'earliest-offset',
+    'connector.startup-mode' = 'group-offsets',
     'connector.properties.group.id' = 'testGroup',
     'connector.properties.zookeeper.connect' = 'localhost:2181',
     'connector.properties.bootstrap.servers' = 'localhost:9092',
@@ -43,7 +43,7 @@ CREATE TABLE orders (
   ,'topic' = 'order_topic'
   ,'properties.bootstrap.servers' = 'localhost:9092'
   ,'properties.group.id' = 'testGroup'
-  ,'scan.startup.mode' = 'earliest-offset'
+  ,'scan.startup.mode' = 'group-offsets'
   ,'format' = 'json'
 );
 
