@@ -14,7 +14,12 @@ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topicNam
 bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topicName --consumer-property group.id=test-group
 cat kafka-consumer-groups
 bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
+describe kafka-consumer-group
 bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group test-group
+describe topic
+bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic topicName
+delete topic
+bin/kafka-topics.sh --delete --zookeeper localhost:2181 --topic topicName
 -------------------------------------------------------------------------------------------------------
 
 Q: How to run fink local, please see 
