@@ -22,7 +22,9 @@ public class SourceTest3_Kafka {
         properties.setProperty("group.id", "consumer-group");
         properties.setProperty("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         properties.setProperty("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        properties.setProperty("auto.offset.reset", "latest");
+        //properties.setProperty("auto.offset.reset", "latest");
+        properties.setProperty("connector.startup-mode", "group-offsets");
+
 
         // flink添加外部数据源
         DataStream<String> dataStream = env.addSource(new FlinkKafkaConsumer<String>("sensor", new SimpleStringSchema(),properties));
