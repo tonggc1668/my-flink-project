@@ -12,4 +12,4 @@ CREATE TABLE outputTable (
   ,'value.format' = 'json'
   ,'value.json.fail-on-missing-field' = 'false'
   ,'value.fields-include' = 'ALL'
-)
+);

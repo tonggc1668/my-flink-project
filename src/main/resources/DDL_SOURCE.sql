@@ -9,4 +9,4 @@ CREATE TABLE inputTable (
   ,'properties.group.id' = 'consumer-group'
   ,'scan.startup.mode' = 'earliest-offset'
   ,'format' = 'csv'
-)
+);
